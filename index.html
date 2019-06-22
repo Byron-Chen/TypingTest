@@ -14,19 +14,26 @@
     </header>
     <main class="main">
       <section class="test-area">
+          <div class="meta">
+              <section id="clock">
+                <div class="timer">1:00</div>
+              </section>
+              <section id="calculations">
+                  <div class="wpm">WPM: 0</div>
+                  <br>
+                  <div class="acc">ACC: 0%</div>
+              </section>
+              
+            </div>
         <div id="origin-text">
           <p></p>
         </div>
         <div class="test-wrapper">
           <textarea id="test-area" name="textarea" rows="1" placeholder="type to begin." autofocus=true spellcheck=false></textarea>
+          <button id="reset">restart</button>
         </div>
 
-        <div class="meta">
-          <section id="clock">
-            <div class="timer">00</div>
-          </section>
-          <button id="reset">r</button>
-        </div>
+        
       </section>
     </main>
   </body>

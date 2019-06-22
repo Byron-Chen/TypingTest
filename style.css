@@ -165,13 +165,14 @@ body {
 }
 
 .test-wrapper textarea {
-    padding: 1em 1em 0;
+    padding: 0em 1em 0 1em;
     flex: 1;
     resize:none;
     border:none;
 }
 
 .meta {
+    padding: 1em 1em 0;
     margin-top: 1em;
     display: flex;
     justify-content: space-between;
@@ -181,11 +182,15 @@ body {
 .timer {
     font-size: 1em;
 }
-
+.wpm{
+    float: left;
+}
+.acc{
+    float:left;
+}
 #reset {
-    padding: .5em 1em;
-    font-size: 1.2em;
-    font-weight: bold;
+    padding: 1px 10px;
+    font-size: 1em;
     color: black;
     background: #ededed;
     border:none;

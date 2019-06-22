@@ -6,8 +6,11 @@ const timerDisplay = document.querySelector(".timer");
 
 var timer = 0;
 var wordList = [];
+var wordsToType = [];
 var interval = null;
 var timerRunning = false;
+var frontText = "";
+var firstLineList = "";
 
 function runTimer(){
   timerDisplay.innerHTML = timer;
@@ -24,26 +27,31 @@ function startTimer(){
 
 function spellCheck(e){
   let textEntered = testArea.value;
-  let _originText = document.querySelector("#origin-text p").innerHTML;
-  let originTextMatch = _originText.substring(0, textEntered.length);
-  let realTextEntered = "";
-  console.log(textEntered, originTextMatch);
-
-  if (e.keyCode == 32){
+  let _originText = document.querySelector("#origin-text p");
+  //console.log(textEntered, wordsToType[0]);
+  if (e.keyCode == 32 || e.keyCode == 13){
     if (testArea.value == " "){
       testArea.value = "";
+    }else{
+      testArea.value = "";
+      firstLineList += wordsToType[0] + 1;
+      if(textEntered.trim() == wordsToType[0]){
+        frontText += '<span class="correct">'+wordsToType.shift() + " "+'</span>';
+        //console.log("yayers");
+      } else {
+        frontText += '<span class="incorrect">'+wordsToType.shift() + " "+'</span>';
+        //console.log("popop");
+      }
+      //console.log(wordsToType)
+      console.log(firstLineList.length)
+      if (firstLineList.length + wordsToType[0].length>= 48){
+        console.log("LMAO");
+      }
+      _originText.innerHTML = frontText;
+      setOriginText(wordsToType);
     }
   }
 
-  //if(textEntered == _originText){
-  //  console.log("yay");
-  //} else {
-  if(textEntered == originTextMatch){
-
-    console.log("yayers");
-  } else {
-    console.log("popop");
-  }
 }
 
 function reset(){
@@ -52,9 +60,15 @@ function reset(){
   interval = null;
   timerRunning = false;
   timer = 0;
+  frontText = "";
+  wordList = [];
+  wordsToType = [];
+  document.querySelector("#origin-text p").innerHTML = "";
 
   testArea.value = "";
   timerDisplay.innerHTML = "00";
+
+  setWords();
 }
 
 function shuffle(list){
@@ -73,9 +87,10 @@ function getRandomLine(list){
   returnList = [];
   stringCheck = "";
   i = 0;
-  while (stringCheck.length + list[i].length + i<= 46){
+  while (stringCheck.length + list[i].length + i<= 89){
     stringCheck += list[i];
     returnList.push(list[i]);
+    wordsToType.push(list[i]);
     i++;
   }
   return returnList;
@@ -87,7 +102,7 @@ function setWords(){
     return response.json();
   })
   .then(function(myJson){
-    wordList = myJson.slice()
+    wordList = myJson.slice();
     wordList = shuffle(wordList);
     setOriginText(getRandomLine(wordList));
   });
@@ -96,9 +111,14 @@ function setWords(){
 function setOriginText(list){
   var s = "";
   for (var w in list){
-    s += list[w] + " ";
+    if (w == 0){
+      document.querySelector("#origin-text p").innerHTML += '<span class="current">'+list[w] + " "+'</span>';
+    }
+    else {
+      s += " " + list[w] + " ";
+    }
   }
-  document.querySelector("#origin-text p").innerHTML += s;
+  document.querySelector("#origin-text p").innerHTML += '<span class="default">'+s+'</span>';
 }
 
 function init(){

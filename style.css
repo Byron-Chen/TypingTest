@@ -21,13 +21,18 @@ p {
 	margin-bottom: 1.5em;
 }
 
-.colourDefault{
+.default{
 	color:#000;
 }
-.colourCurrent{
-	color:#4C67FF;
+.current{
+	color:#B25CAF;
+	text-decoration: underline;
+  display: inline-block;
 }
-.colourWrong{
+.correct{
+	color:#00B600;
+}
+.incorrect{
 	color:#FF0000;
 }
 

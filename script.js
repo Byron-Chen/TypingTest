@@ -20,20 +20,25 @@ var incorrectWord = ""
 var accuracy = 0;
 var wpm = 0;
 
+var timeLength = 6000;
+
 function runTimer(){
-  timerDisplay.innerHTML = (6000 - timer)/100;
+  timerDisplay.innerHTML = (timeLength - timer)/100;
   timer++;
-  if (timer >= 6000){
+  if (timer >= timeLength){
+    document.querySelector("#origin-text p").innerHTML = "Time Over"
+    timerDisplay.innerHTML = "0:00";
     timerRunning = false;
     clearInterval(interval);
     interval = null;
   }
-  console.log(typedWords.length, incorrectWord.length)
-  wpmDisplay.innerHTML = "WPM: " + Math.floor((((typedWords.length/5) - 5)/ (timer/6000)));
+  wpmDisplay.innerHTML = "WPM: " + Math.floor((((typedWords.split(" ").length) - 1) / (timer / 6000)));
   c = typedWords.split(" ").length - 1;
   i = incorrectWord.split(" ").length - 1;
-  t = c + i
-  accDisplay.innerHTML = "ACC: " + Math.floor((c / t) * 100) + "%";
+  t = c + i;
+  if (t != 0){
+    accDisplay.innerHTML = "ACC: " + Math.floor((c / t) * 100) + "%";
+  }
 }
 
 function startTimer(){
@@ -47,11 +52,13 @@ function startTimer(){
 function spellCheck(e){
   let textEntered = testArea.value;
   let _originText = document.querySelector("#origin-text p");
-  //console.log(textEntered, wordsToType[0]);
+  //if (textEntered.trim() != wordsToType[0].substring(0, textEntered.trim().length)){
+    //console.log("NOT", textEntered.trim())
+  //}
   if (e.keyCode == 32 || e.keyCode == 13){
     if (testArea.value == " "){
       testArea.value = "";
-    }else{
+    }else if(timerRunning){
       testArea.value = "";
       firstLineList += wordsToType[0] + 1;
       if(textEntered.trim() == wordsToType[0]){
@@ -86,8 +93,8 @@ function reset(){
   testArea.value = "";
   timerDisplay.innerHTML = "1:00";
 
-  typedWords = ""
-  ncorrectWord = ""
+  typedWords = "";
+  incorrectWord = "";
   accuracy = 0;
   wpm = 0;
 
@@ -97,6 +104,8 @@ function reset(){
   setWords();
 }
 
+//fisher-yates shuffle
+//https://bost.ocks.org/mike/shuffle/
 function shuffle(list){
   var m = list.length, t, i;
   while (m !== 0){
@@ -148,7 +157,6 @@ function setOriginText(list){
   }
   document.querySelector("#origin-text p").innerHTML += '<span class="default">'+s+'</span>';
 }
-
 function init(){
   setWords();
   testArea.value = "";

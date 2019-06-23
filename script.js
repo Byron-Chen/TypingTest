@@ -86,6 +86,7 @@ function reset(){
   timerRunning = false;
   timer = 0;
   frontText = "";
+  firstLineList = "";
   wordList = [];
   wordsToType = [];
   document.querySelector("#origin-text p").innerHTML = "";

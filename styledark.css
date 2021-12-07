@@ -1,3 +1,8 @@
+body{
+    background-color: #2E3440;
+}
+
+
 body,
 button,
 input,
@@ -6,6 +11,7 @@ textarea {
 	font-family: 'Roboto Mono', monospace;
 	font-size: 18px;
 	line-height: 1.5;
+    color: #D3DAE8;
 }
 
 h1,
@@ -22,12 +28,12 @@ p {
 }
 
 .default{
-	color:#000;
+	color:#D3DAE8;;
 }
 .current{
 	color:#B25CAF;
 	text-decoration: underline;
-  display: inline-block;
+    display: inline-block;
 }
 .correct{
 	color:#00B600;
@@ -35,7 +41,6 @@ p {
 .incorrect{
 	color:#FF0000;
 }
-
 
 
 /*--------------------------------------------------------------
@@ -46,13 +51,10 @@ body {
     padding: 0;
 }
 
-.header {
-    color: black;
-}
-
 .header h1 {
     text-align: center;
 }
+
 
 
 .intro p,
@@ -70,7 +72,7 @@ body {
 #origin-text {
     margin: 1em 0;
     padding: 1em 1em 0;
-    background-color: #ededed;
+    background-color: #2E3440;
 }
 
 #origin-text p {
@@ -87,6 +89,8 @@ body {
     flex: 1;
     resize:none;
     border:none;
+    background-color: #2E3440;
+    color: #ededed;
 }
 
 .meta {
@@ -109,8 +113,8 @@ body {
 #reset {
     padding: 1px 10px;
     font-size: 1em;
-    color: black;
-    background: #ededed;
+    color: #D3DAE8;
+    background-color: #2E3440;
     border:none;
 }
 
@@ -121,14 +125,14 @@ body {
 #dark-mode {
     padding: 1px 10px;
     font-size: 1em;
-    color: black;
-    background: white;
+    color: #D3DAE8;
+    background-color: #2E3440;
     border:none;
 }
 
 #dark-mode:hover {
-    color: #D3DAE8;
-    background-color: #2E3440;
+    color: black;
+    background-color: white;
 }
 
 
@@ -146,6 +150,6 @@ body {
     text-align: right;
 }
 
-a {
-    color: black;
+.footer a{
+    color: #D3DAE8;
 }

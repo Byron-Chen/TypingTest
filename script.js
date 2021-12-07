@@ -5,6 +5,7 @@ const resetButton = document.querySelector("#reset");
 const timerDisplay = document.querySelector(".timer");
 const wpmDisplay = document.querySelector(".wpm");
 const accDisplay = document.querySelector(".acc");
+const darkMode = document.querySelector("#dark-mode")
 
 var timer = 0;
 var wordList = [];
@@ -146,6 +147,18 @@ function setWords(){
   });
 }
 
+function flipColor(){
+  theme = document.querySelector("#csstheme");
+  if(theme.getAttribute("href") == "style.css"){
+    theme.href = "styledark.css"
+    darkMode.innerText = "light mode"
+  } else{
+    theme.href = "style.css"
+    darkMode.innerText = "dark mode"
+  }
+  console.log("t")
+}
+
 function setOriginText(list){
   var s = "";
   for (var w in list){
@@ -164,5 +177,6 @@ function init(){
   testArea.addEventListener("keypress", startTimer, false);
   testArea.addEventListener("keyup", spellCheck, false);
   resetButton.addEventListener("click", reset, false);
+  darkMode.addEventListener("click", flipColor, false);
 }
 window.onload = init;
